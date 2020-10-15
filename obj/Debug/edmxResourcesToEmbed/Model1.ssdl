@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище Karneus_PlanerModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AccountData">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="idNameNote" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="idSpisok" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="idDescriptiom" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Desc">
+    <Key>
+      <PropertyRef Name="idDescription" />
+    </Key>
+    <Property Name="idDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Note_Table">
+    <Key>
+      <PropertyRef Name="idNameNote" />
+    </Key>
+    <Property Name="idNameNote" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="FileChoosen" Type="nvarchar" MaxLength="50" />
+    <Property Name="Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="Completed" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Profile">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SurName" Type="nvarchar" MaxLength="50" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateOfBirth" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RegistDB">
+    <Key>
+      <PropertyRef Name="Login" />
+    </Key>
+    <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Spisok">
+    <Key>
+      <PropertyRef Name="idSpisok" />
+    </Key>
+    <Property Name="idSpisok" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SpisonName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_AccountData_Desc">
+    <End Role="Desc" Type="Self.Desc" Multiplicity="0..1" />
+    <End Role="AccountData" Type="Self.AccountData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Desc">
+        <PropertyRef Name="idDescription" />
+      </Principal>
+      <Dependent Role="AccountData">
+        <PropertyRef Name="idDescriptiom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccountData_Note_Table">
+    <End Role="Note_Table" Type="Self.Note_Table" Multiplicity="1" />
+    <End Role="AccountData" Type="Self.AccountData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Note_Table">
+        <PropertyRef Name="idNameNote" />
+      </Principal>
+      <Dependent Role="AccountData">
+        <PropertyRef Name="idNameNote" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccountData_Profile">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+    <End Role="AccountData" Type="Self.AccountData" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="AccountData">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccountData_Spisok">
+    <End Role="Spisok" Type="Self.Spisok" Multiplicity="1" />
+    <End Role="AccountData" Type="Self.AccountData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Spisok">
+        <PropertyRef Name="idSpisok" />
+      </Principal>
+      <Dependent Role="AccountData">
+        <PropertyRef Name="idSpisok" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Profile_RegistDB">
+    <End Role="RegistDB" Type="Self.RegistDB" Multiplicity="1" />
+    <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RegistDB">
+        <PropertyRef Name="Login" />
+      </Principal>
+      <Dependent Role="Profile">
+        <PropertyRef Name="Login" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище Karneus_PlanerModelContainer">
+    <EntitySet Name="AccountData" EntityType="Self.AccountData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Desc" EntityType="Self.Desc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Note_Table" EntityType="Self.Note_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RegistDB" EntityType="Self.RegistDB" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Spisok" EntityType="Self.Spisok" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AccountData_Desc" Association="Self.FK_AccountData_Desc">
+      <End Role="Desc" EntitySet="Desc" />
+      <End Role="AccountData" EntitySet="AccountData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccountData_Note_Table" Association="Self.FK_AccountData_Note_Table">
+      <End Role="Note_Table" EntitySet="Note_Table" />
+      <End Role="AccountData" EntitySet="AccountData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccountData_Profile" Association="Self.FK_AccountData_Profile">
+      <End Role="Profile" EntitySet="Profile" />
+      <End Role="AccountData" EntitySet="AccountData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccountData_Spisok" Association="Self.FK_AccountData_Spisok">
+      <End Role="Spisok" EntitySet="Spisok" />
+      <End Role="AccountData" EntitySet="AccountData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Profile_RegistDB" Association="Self.FK_Profile_RegistDB">
+      <End Role="RegistDB" EntitySet="RegistDB" />
+      <End Role="Profile" EntitySet="Profile" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

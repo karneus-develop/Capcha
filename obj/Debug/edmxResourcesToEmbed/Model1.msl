@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище Karneus_PlanerModelContainer" CdmEntityContainer="Karneus_PlanerEntities">
+    <EntitySetMapping Name="AccountData">
+      <EntityTypeMapping TypeName="Karneus_PlanerModel.AccountData">
+        <MappingFragment StoreEntitySet="AccountData">
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="idNameNote" ColumnName="idNameNote" />
+          <ScalarProperty Name="idSpisok" ColumnName="idSpisok" />
+          <ScalarProperty Name="idDescriptiom" ColumnName="idDescriptiom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Desc">
+      <EntityTypeMapping TypeName="Karneus_PlanerModel.Desc">
+        <MappingFragment StoreEntitySet="Desc">
+          <ScalarProperty Name="idDescription" ColumnName="idDescription" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Note_Table">
+      <EntityTypeMapping TypeName="Karneus_PlanerModel.Note_Table">
+        <MappingFragment StoreEntitySet="Note_Table">
+          <ScalarProperty Name="idNameNote" ColumnName="idNameNote" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="FileChoosen" ColumnName="FileChoosen" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Completed" ColumnName="Completed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profile">
+      <EntityTypeMapping TypeName="Karneus_PlanerModel.Profile">
+        <MappingFragment StoreEntitySet="Profile">
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="SurName" ColumnName="SurName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegistDB">
+      <EntityTypeMapping TypeName="Karneus_PlanerModel.RegistDB">
+        <MappingFragment StoreEntitySet="RegistDB">
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Spisok">
+      <EntityTypeMapping TypeName="Karneus_PlanerModel.Spisok">
+        <MappingFragment StoreEntitySet="Spisok">
+          <ScalarProperty Name="idSpisok" ColumnName="idSpisok" />
+          <ScalarProperty Name="SpisonName" ColumnName="SpisonName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

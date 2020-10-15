@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Karneus_PlanerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AccountData">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="idNameNote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="idSpisok" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="idDescriptiom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Desc" Relationship="Self.FK_AccountData_Desc" FromRole="AccountData" ToRole="Desc" />
+    <NavigationProperty Name="Note_Table" Relationship="Self.FK_AccountData_Note_Table" FromRole="AccountData" ToRole="Note_Table" />
+    <NavigationProperty Name="Profile" Relationship="Self.FK_AccountData_Profile" FromRole="AccountData" ToRole="Profile" />
+    <NavigationProperty Name="Spisok" Relationship="Self.FK_AccountData_Spisok" FromRole="AccountData" ToRole="Spisok" />
+  </EntityType>
+  <EntityType Name="Desc">
+    <Key>
+      <PropertyRef Name="idDescription" />
+    </Key>
+    <Property Name="idDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AccountData" Relationship="Self.FK_AccountData_Desc" FromRole="Desc" ToRole="AccountData" />
+  </EntityType>
+  <EntityType Name="Note_Table">
+    <Key>
+      <PropertyRef Name="idNameNote" />
+    </Key>
+    <Property Name="idNameNote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FileChoosen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Completed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AccountData" Relationship="Self.FK_AccountData_Note_Table" FromRole="Note_Table" ToRole="AccountData" />
+  </EntityType>
+  <EntityType Name="Profile">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SurName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AccountData" Relationship="Self.FK_AccountData_Profile" FromRole="Profile" ToRole="AccountData" />
+    <NavigationProperty Name="RegistDB" Relationship="Self.FK_Profile_RegistDB" FromRole="Profile" ToRole="RegistDB" />
+  </EntityType>
+  <EntityType Name="RegistDB">
+    <Key>
+      <PropertyRef Name="Login" />
+    </Key>
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Profile" Relationship="Self.FK_Profile_RegistDB" FromRole="RegistDB" ToRole="Profile" />
+  </EntityType>
+  <EntityType Name="Spisok">
+    <Key>
+      <PropertyRef Name="idSpisok" />
+    </Key>
+    <Property Name="idSpisok" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SpisonName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AccountData" Relationship="Self.FK_AccountData_Spisok" FromRole="Spisok" ToRole="AccountData" />
+  </EntityType>
+  <Association Name="FK_AccountData_Desc">
+    <End Role="Desc" Type="Self.Desc" Multiplicity="0..1" />
+    <End Role="AccountData" Type="Self.AccountData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Desc">
+        <PropertyRef Name="idDescription" />
+      </Principal>
+      <Dependent Role="AccountData">
+        <PropertyRef Name="idDescriptiom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccountData_Note_Table">
+    <End Role="Note_Table" Type="Self.Note_Table" Multiplicity="1" />
+    <End Role="AccountData" Type="Self.AccountData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Note_Table">
+        <PropertyRef Name="idNameNote" />
+      </Principal>
+      <Dependent Role="AccountData">
+        <PropertyRef Name="idNameNote" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccountData_Profile">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+    <End Role="AccountData" Type="Self.AccountData" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="AccountData">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccountData_Spisok">
+    <End Role="Spisok" Type="Self.Spisok" Multiplicity="1" />
+    <End Role="AccountData" Type="Self.AccountData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Spisok">
+        <PropertyRef Name="idSpisok" />
+      </Principal>
+      <Dependent Role="AccountData">
+        <PropertyRef Name="idSpisok" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Profile_RegistDB">
+    <End Role="RegistDB" Type="Self.RegistDB" Multiplicity="1" />
+    <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RegistDB">
+        <PropertyRef Name="Login" />
+      </Principal>
+      <Dependent Role="Profile">
+        <PropertyRef Name="Login" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Karneus_PlanerEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AccountData" EntityType="Self.AccountData" />
+    <EntitySet Name="Desc" EntityType="Self.Desc" />
+    <EntitySet Name="Note_Table" EntityType="Self.Note_Table" />
+    <EntitySet Name="Profile" EntityType="Self.Profile" />
+    <EntitySet Name="RegistDB" EntityType="Self.RegistDB" />
+    <EntitySet Name="Spisok" EntityType="Self.Spisok" />
+    <AssociationSet Name="FK_AccountData_Desc" Association="Self.FK_AccountData_Desc">
+      <End Role="Desc" EntitySet="Desc" />
+      <End Role="AccountData" EntitySet="AccountData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccountData_Note_Table" Association="Self.FK_AccountData_Note_Table">
+      <End Role="Note_Table" EntitySet="Note_Table" />
+      <End Role="AccountData" EntitySet="AccountData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccountData_Profile" Association="Self.FK_AccountData_Profile">
+      <End Role="Profile" EntitySet="Profile" />
+      <End Role="AccountData" EntitySet="AccountData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccountData_Spisok" Association="Self.FK_AccountData_Spisok">
+      <End Role="Spisok" EntitySet="Spisok" />
+      <End Role="AccountData" EntitySet="AccountData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Profile_RegistDB" Association="Self.FK_Profile_RegistDB">
+      <End Role="RegistDB" EntitySet="RegistDB" />
+      <End Role="Profile" EntitySet="Profile" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
